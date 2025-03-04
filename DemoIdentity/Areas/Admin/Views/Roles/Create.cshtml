@@ -1,0 +1,17 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Créer un Rôle";
+}
+
+<h2>Créer un Rôle</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label for="roleName" class="form-label">Nom du Rôle</label>
+        <input type="text" name="roleName" id="roleName" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">Créer</button>
+    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+</form>

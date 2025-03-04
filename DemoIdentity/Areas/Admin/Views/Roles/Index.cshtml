@@ -1,0 +1,32 @@
+﻿@model List<IdentityRole>
+
+@{
+    ViewData["Title"] = "Gestion des Rôles";
+}
+
+<h2>Gestion des Rôles</h2>
+
+<a asp-action="Create" class="btn btn-success">Créer un Rôle</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom du Rôle</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@role.Id" class="btn btn-primary btn-sm">Modifier</a>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@role.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?');">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AppUser>
+@{
+    ViewData["Title"] = "Gestion des Utilisateurs";
+}
+
+<h2>Gestion des Utilisateurs</h2>
+
+<a asp-action="Create" class="btn btn-success">Ajouter un utilisateur</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Adresse</th>
+            <th>Email confirmé</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.AdresseRue @user.AdresseCodePostal @user.AdresseVille</td>
+                <td>@if (user.EmailConfirmed)
+                { <span class="badge bg-success">Oui</span> }
+                else
+                { <span class="badge bg-danger">Non</span> }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Modifier</a>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@user.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?');">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
